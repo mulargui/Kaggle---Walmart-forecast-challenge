@@ -1,0 +1,125 @@
+Experiment #5
+Asumptions:
+Sales per department are independent
+Sales per week are independent
+md influence sales only in the week they are active
+
+unified the data model to one table
+walmart vlookup.xlsx
+
+Feature scaling and mean normalization
+markdowns
+	replaced NA by 0 
+	no 0 on md1,4 and 5
+	md2 has 207 0 and 1311 negatives - postpone inclusion
+	md3 has 67 0 and 257 negatives - postpone inclusion
+walmart normalized.xlsx
+
+Linear regression problem
+	used lm (linear model) in R
+	
+We have data for 32 months. Use last 6 months (20%) (116+ week) as a verification set
+
+[1] 1262461051
+[1] 1298656605
+[1] -36195555
+[1] -2.867063
+
+Experiment #6
+cuadratic regression
+not all parameters included
+
+[1] 1262461051
+[1] 1288967995
+[1] -26506945
+[1] -2.099625
+
+Experiment #7
+cubic regression
+not all parameters included
+
+[1] 1262461051
+[1] 1497299167
+[1] -234838117
+[1] -18.60161
+
+Experiment #8
+exp6 (cuadratic regression) with ALL parameters
+
+[1] 1262461051
+[1] 1196427193
+[1] 66033857
+[1] 5.230566
+
+Experiment #9
+exp5 and seasonality
+
+[1] 1262461051
+[1] 1271193187
+[1] -8732137
+[1] -0.6916757
+
+Experiment #10
+exp9 plus no 0's for type ( use 1,2,3) or date (weeks start by 1)
+
+[1] 1262461051
+[1] 1269347737
+[1] -6886687
+[1] -0.545497
+
+Experiment #11
+exp10 plus replace NA by avg
+walmart normalized.xlsx
+
+[1] 1262461051
+[1] 1256671997
+[1] 5789054
+[1] 0.4585531
+
+Experiment #12
+Exp11 but data load and transformations in R
+Used the complete dataset
+
+Call:
+lm(formula = Weekly_Sales ~ Store + Dept + Date + IsHoliday + 
+    Type + Temperature + Fuel_Price + MarkDown1 + MarkDown2 + 
+    MarkDown3 + MarkDown4 + MarkDown5 + CPI + Unemployment + 
+    Seasonality, data = dfrm)
+
+Residuals:
+   Min     1Q Median     3Q    Max 
+-39703 -13261  -6634   5266 673117 
+
+Coefficients:
+              Estimate Std. Error  t value Pr(>|t|)    
+(Intercept)  21318.858    207.582  102.701  < 2e-16 ***
+Store         -100.683      2.824  -35.656  < 2e-16 ***
+Dept           111.460      1.111  100.302  < 2e-16 ***
+Date            -4.112      1.560   -2.636 0.008391 ** 
+IsHoliday      486.772    142.780    3.409 0.000652 ***
+Type         -5585.622     53.948 -103.537  < 2e-16 ***
+Temperature    317.520     36.562    8.684  < 2e-16 ***
+Fuel_Price     183.714     63.035    2.914 0.003563 ** 
+MarkDown1      505.103     56.825    8.889  < 2e-16 ***
+MarkDown2      151.558     35.623    4.254 2.10e-05 ***
+MarkDown3      725.756     35.826   20.258  < 2e-16 ***
+MarkDown4       46.679     55.675    0.838 0.401799     <========= Not relevant
+MarkDown5      628.804     34.829   18.054  < 2e-16 ***
+CPI          -1028.236     39.153  -26.262  < 2e-16 ***
+Unemployment  -178.570     38.643   -4.621 3.82e-06 ***
+Seasonality     25.862      2.691    9.611  < 2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 21990 on 421554 degrees of freedom
+Multiple R-squared:  0.06229,	Adjusted R-squared:  0.06226 
+F-statistic:  1867 on 15 and 421554 DF,  p-value: < 2.2e-16
+
+look at the data looking for insights
+does any md influence in other weeks?
+include additional holidays?
+does holidays influence other weeks?
+
+research lm params
+	do we need normalization or lm does?
+replace lm by gradient descent
