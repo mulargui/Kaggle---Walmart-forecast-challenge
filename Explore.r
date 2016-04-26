@@ -1,4 +1,6 @@
-# https://github.com/mulargui/Kaggle---Walmart-forecast-challenge
+
+#========================================================================
+#Data set load and prep
 
 #working directory
 setwd("C:/mauricio/Dropbox/vagrant/apps/Kaggle---Walmart-forecast-challenge")
@@ -7,14 +9,7 @@ setwd("C:/mauricio/Dropbox/vagrant/apps/Kaggle---Walmart-forecast-challenge")
 dftrain <- read.csv("train.csv", header=TRUE)
 dffeatures <- read.csv("features.csv", header=TRUE)
 dfstores <- read.csv("stores.csv", header=TRUE)
-dftest <- read.csv("test.csv", header=TRUE)
-
-#add Weekly_Sales column to the test dataset
-dftest[,"Weekly_Sales"] <- NA
-
-#create one dataset
-dftmp1 <- rbind(dftrain, dftest)
-dftmp2 <- merge(dftmp1, dfstores, by = "Store")
+dftmp2 <- merge(dftrain, dfstores, by = "Store")
 dfrm <- merge(dftmp2, dffeatures, by = c("Store","Date", "IsHoliday"))
 
 #replace NAs by mean value
@@ -50,34 +45,89 @@ dfrm$MarkDown5 <- scale(dfrm$MarkDown5)
 dfrm$CPI <- scale(dfrm$CPI)
 dfrm$Unemployment <- scale(dfrm$Unemployment)
 
-# fit a linear model
-#MarkDown4, Week and Fuel_Price are not relevant
+#========================================================================
+#basic linear model statistics
 res <- lm( Weekly_Sales ~ Store 
 		+ Dept 
-#		+ Week 
+		+ Week 
 		+ IsHoliday 
 		+ Type 
 		+ Temperature 
-#		+ Fuel_Price 
+		+ Fuel_Price 
 		+ MarkDown1 
 		+ MarkDown2 
 		+ MarkDown3 
-#		+ MarkDown4 
+		+ MarkDown4 
 		+ MarkDown5 
 		+ CPI 
 		+ Unemployment 
 		+ Seasonality
-		, data = dfrm
-		,subset = (Week < 144))
-#		,subset = (is.na(Weekly_Sales)))
+		, data = dfrm)
 
+summary(res)
+anova(res)
+#MarkDown4 not relevant
+#High correlation of other variables (p-value < 0.05)
+#Low quality of model (R-square VERY low)
+
+#========================================================================
+#selection of regression variables backward
+resb <- lm( Weekly_Sales ~ Store 
+		+ Dept 
+		+ Week 
+		+ IsHoliday 
+		+ Type 
+		+ Temperature 
+		+ Fuel_Price 
+		+ MarkDown1 
+		+ MarkDown2 
+		+ MarkDown3 
+		+ MarkDown4 
+		+ MarkDown5 
+		+ CPI 
+		+ Unemployment 
+		+ Seasonality
+		, data = dfrm)
+reduced <- step(resb, direction = "backward")
+summary(reduced)
+anova(reduced)
+#MarkDown4 not relevant
+
+#========================================================================
+#selection of regression variables forward
+res1 <- lm( Weekly_Sales ~ 1, data = dfrm)
+fwd <- step(res1, direction = "forward", scope = (~ Store 
+		+ Dept 
+		+ Week 
+		+ IsHoliday 
+		+ Type 
+		+ Temperature 
+		+ Fuel_Price 
+		+ MarkDown1 
+		+ MarkDown2 
+		+ MarkDown3 
+		+ MarkDown4 
+		+ MarkDown5 
+		+ CPI 
+		+ Unemployment 
+		+ Seasonality))
+summary(fwd)
+anova(fwd)
+#MarkDown4, Week and Fuel_Price are not relevant
+
+#========================================================================
+library(MASS)
+bc <- boxcox(res)
+
+#========================================================================
+#graphics analysis
+#plot(dfrm$MarkDown1, dfrm$Weekly_Sales)
+#abline (res)
+
+#========================================================================
 #predict weekly sales
 #res <- predict (res, subset(dfrm, is.na(dfrm$Weekly_Sales)), interval='prediction', level=0.99)
-dfrm$Weekly_Sales[is.na(dfrm$Weekly_Sales)] <- predict (res, subset(dfrm, is.na(dfrm$Weekly_Sales)))
-
-#preparing the submission file
-#Adding a column with store_department_date
-dfrm[,"Id"] <- paste(dfrm$Store, dfrm$Dept, format(as.Date(dfrm$Date), "%Y_%m_%d" ), sep = "_") 
+#dfrm$Weekly_Sales[is.na(dfrm$Weekly_Sales)] <- predict (res, subset(dfrm, is.na(dfrm$Weekly_Sales)))
 
 #save results in a csv file
-write.csv(file = "Solution.csv", x = subset(dfrm, Week > 143,  select = c(Id, Weekly_Sales)), row.names=FALSE)
+#write.csv(file = "tmp.csv", x = dfrm)
