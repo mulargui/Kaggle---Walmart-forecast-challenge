@@ -77,7 +77,7 @@ dfrm$Weekly_Sales[is.na(dfrm$Weekly_Sales)] <- predict (res, subset(dfrm, is.na(
 
 #preparing the submission file
 #Adding a column with store_department_date
-dfrm[,"Id"] <- paste(dfrm$Store, dfrm$Dept, format(as.Date(dfrm$Date), "%Y_%m_%d" ), sep = "_") 
+dfrm[,"Id"] <- paste(dfrm$Store, dfrm$Dept, format(as.Date(dfrm$Date), "%Y-%m-%d" ), sep = "_") 
 
 #save results in a csv file
 write.csv(file = "Solution.csv", x = subset(dfrm, Week > 143,  select = c(Id, Weekly_Sales)), row.names=FALSE)

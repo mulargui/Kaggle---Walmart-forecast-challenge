@@ -79,6 +79,7 @@ walmart normalized.xlsx
 Experiment #12
 Exp11 but data load and transformations in R
 Used the complete dataset
+Generates a solution to the problem
 
 Call:
 lm(formula = Weekly_Sales ~ Store + Dept + Date + IsHoliday + 
@@ -115,11 +116,5 @@ Residual standard error: 21990 on 421554 degrees of freedom
 Multiple R-squared:  0.06229,	Adjusted R-squared:  0.06226 
 F-statistic:  1867 on 15 and 421554 DF,  p-value: < 2.2e-16
 
-look at the data looking for insights
-does any md influence in other weeks?
-include additional holidays?
-does holidays influence other weeks?
-
-research lm params
-	do we need normalization or lm does?
-replace lm by gradient descent
+Experiment #13
+Use different statistic tools to improve the lm model
