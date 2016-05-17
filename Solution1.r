@@ -35,8 +35,8 @@ avg_sales <- dfrm %>%
 #predict based on average sales  
 dfrm <- merge(dftest, avg_sales, by = c("Store","Dept", "Seasonality"), all.x = TRUE)
 
-#for depts with no data use average of the data set
-dfrm$Weekly_Sales[is.na(dfrm$Weekly_Sales)] <- mean(dfrm$Weekly_Sales,na.rm=TRUE)
+#for depts with no data use 0
+dfrm$Weekly_Sales[is.na(dfrm$Weekly_Sales)] <- 0
 
 #preparing the submission file
 #Adding a column with store_department_date
