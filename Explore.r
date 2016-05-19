@@ -131,3 +131,36 @@ bc <- boxcox(res)
 
 #save results in a csv file
 #write.csv(file = "tmp.csv", x = dfrm)
+
+#========================================================================
+#shows differences with the different date algorithms
+#working directory
+setwd("C:/mauricio/Dropbox/vagrant/apps/Kaggle---Walmart-forecast-challenge")
+
+library("dplyr")
+
+#load data
+dftrain <- read.csv("train.csv", header=TRUE)
+dftest <- read.csv("test.csv", header=TRUE)
+
+#Add Seasonality Column based on factor of Date
+dftrain[,"Seasonality"] <- (as.numeric(dftrain$Date) %% 52) + 1 
+dftest[,"Seasonality"] <- ((as.numeric(dftest$Date) + 143) %% 52) + 1 
+
+# using ISO calendar week
+dftrain[,"Seasonality2"] <- format(as.Date(dftrain$Date), "%U")
+dftest[,"Seasonality2"]  <- format(as.Date(dftest$Date), "%U")
+
+dftraindiff <- dftrain %>% 
+	select(Date, IsHoliday, Seasonality, Seasonality2) %>%
+	distinct()
+
+dftestdiff <- dftest %>% 
+	select(Date, IsHoliday, Seasonality, Seasonality2) %>%
+	distinct()
+
+dftotal <- rbind(dftraindiff, dftestdiff)
+dftotal <- transform(dftotal, Diff = as.numeric(Seasonality2) - Seasonality)
+
+write.csv(file = "datedifferences.csv", dftotal, row.names=FALSE)
+

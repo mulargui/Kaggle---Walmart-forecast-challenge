@@ -118,3 +118,13 @@ F-statistic:  1867 on 15 and 421554 DF,  p-value: < 2.2e-16
 
 Experiment #13
 Use different statistic tools to improve the lm model
+
+Experiment #14
+Just use average sales of historical data. 
+Fill wiht average total sales for NAs. Ranking 325
+Fill with 0s NAs. Ranking 292
+
+Experiment #15
+For a correct week seasonality don't use ISO week standard.
+Under ISO week standard 2012 has 53 weeks and hence 2013 weeks are shifted one week
+Using weeks from beginning % 52
