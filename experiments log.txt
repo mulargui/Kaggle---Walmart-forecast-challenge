@@ -1,4 +1,4 @@
-Experiment #5
+﻿Experiment #5
 Asumptions:
 Sales per department are independent
 Sales per week are independent
@@ -76,10 +76,10 @@ walmart normalized.xlsx
 [1] 5789054
 [1] 0.4585531
 
-Experiment #12
+Experiment #12 (Solution.r)
 Exp11 but data load and transformations in R
 Used the complete dataset
-Generates a solution to the problem
+Generates a solution to the problem. Ranking 625
 
 Call:
 lm(formula = Weekly_Sales ~ Store + Dept + Date + IsHoliday + 
@@ -119,7 +119,7 @@ F-statistic:  1867 on 15 and 421554 DF,  p-value: < 2.2e-16
 Experiment #13
 Use different statistic tools to improve the lm model
 
-Experiment #14
+Experiment #14 (Solution1.r)
 Just use average sales of historical data. 
 Fill wiht average total sales for NAs. Ranking 325
 Fill with 0s NAs. Ranking 292
@@ -127,4 +127,7 @@ Fill with 0s NAs. Ranking 292
 Experiment #15
 For a correct week seasonality don't use ISO week standard.
 Under ISO week standard 2012 has 53 weeks and hence 2013 weeks are shifted one week
-Using weeks from beginning % 52
+Using weeks from beginning (factor) % 52
+
+Experiment #16 (Solution2.r)
+exp 14 but using lm instead of average sales. Ranking 322
