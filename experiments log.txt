@@ -18,7 +18,7 @@ walmart normalized.xlsx
 Linear regression problem
 	used lm (linear model) in R
 	
-We have data for 32 months. Use last 6 months (20%) (116+ week) as a verification set
+We have data for 32 months. Used last 6 months (20%) (116+ week) as a verification set
 
 [1] 1262461051
 [1] 1298656605
@@ -77,7 +77,7 @@ walmart normalized.xlsx
 [1] 0.4585531
 
 Experiment #12 (Solution.r)
-Exp11 but data load and transformations in R
+Exp 11 but data load and transformations in R
 Used the complete dataset
 Generates a solution to the problem. Ranking 625
 
@@ -117,7 +117,7 @@ Multiple R-squared:  0.06229,	Adjusted R-squared:  0.06226
 F-statistic:  1867 on 15 and 421554 DF,  p-value: < 2.2e-16
 
 Experiment #13
-Use different statistic tools to improve the lm model
+Used different statistic tools to improve the lm model
 
 Experiment #14 (Solution1.r)
 Just use average sales of historical data. 
@@ -134,3 +134,6 @@ exp 14 but using lm instead of average sales. Ranking 322
 
 Experiment #17 (Solution3.r)
 exp 12 but using last year sales instead of lm. Ranking 169
+
+Experiment #18 (Solution4.r)
+exp 17 and adjusting christmas holidays week to have the same number of sales days (2011 has 2 days and 2013 has 4 days). Ranking 102
