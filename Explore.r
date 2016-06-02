@@ -120,19 +120,6 @@ library(MASS)
 bc <- boxcox(res)
 
 #========================================================================
-#graphics analysis
-#plot(dfrm$MarkDown1, dfrm$Weekly_Sales)
-#abline (res)
-
-#========================================================================
-#predict weekly sales
-#res <- predict (res, subset(dfrm, is.na(dfrm$Weekly_Sales)), interval='prediction', level=0.99)
-#dfrm$Weekly_Sales[is.na(dfrm$Weekly_Sales)] <- predict (res, subset(dfrm, is.na(dfrm$Weekly_Sales)))
-
-#save results in a csv file
-#write.csv(file = "tmp.csv", x = dfrm)
-
-#========================================================================
 #shows differences with the different date algorithms
 #working directory
 setwd("C:/mauricio/Dropbox/vagrant/apps/Kaggle---Walmart-forecast-challenge")
