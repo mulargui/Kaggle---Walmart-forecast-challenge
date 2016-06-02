@@ -131,3 +131,6 @@ Using weeks from beginning (factor) % 52
 
 Experiment #16 (Solution2.r)
 exp 14 but using lm instead of average sales. Ranking 322
+
+Experiment #17 (Solution3.r)
+exp 12 but using last year sales instead of lm. Ranking 169
