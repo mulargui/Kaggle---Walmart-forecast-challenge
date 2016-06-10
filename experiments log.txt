@@ -147,3 +147,6 @@ exp 19 and using ARIMA. Ranking 409
 
 Experiment #21 (Solution6.r)
 exp 20 and 5x weighting holidays. Ranking 538
+
+Experiment #22 (Solution7.r)
+exp 20 and using a neural network. Ranking 439
