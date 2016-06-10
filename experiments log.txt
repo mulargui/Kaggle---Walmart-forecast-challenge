@@ -136,4 +136,14 @@ Experiment #17 (Solution3.r)
 exp 12 but using last year sales instead of lm. Ranking 169
 
 Experiment #18 (Solution4.r)
-exp 17 and adjusting christmas holidays week to have the same number of sales days (2011 has 2 days and 2013 has 4 days). Ranking 102
+exp 17 and adjusting christmas holidays week to have the same number of sales days in 2011 and 2012 (2011 has 2 days and 2012 has 4 days). 
+Accumulated sales of weeks 48 & 49, divided by 14 days to set sales by day, and shifted the sales of 2 days from week 48 to 49. Ranking 102
+
+Experiment #19 (Solution4.r)
+exp 18 and assigned all the sales of week 48 and 49 to days prior to christmas (8 days in 2011) instead of 14 days. Ranking 266
+
+Experiment #20 (Solution5.r)
+exp 19 and using ARIMA. Ranking 409
+
+Experiment #21 (Solution6.r)
+exp 20 and 5x weighting holidays. Ranking 538

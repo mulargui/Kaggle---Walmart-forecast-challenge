@@ -34,7 +34,8 @@ for (i in 1:45)
 				filter(Store == i) %>%
 				filter(Dept == j)
 			if(nrow(dfsample) == 0) next
-			inc_sales <- sum(dfsample$Weekly_Sales) / 7	
+			inc_sales <- sum(dfsample$Weekly_Sales) * 2 / 14	
+			#inc_sales <- sum(dfsample$Weekly_Sales) * 2 / 8	
 			old <- dfsample$Weekly_Sales[(dfsample$Seasonality == 48)]
 			dftrain$Weekly_Sales[(dftrain$Store==i)&(dftrain$Dept == j)&(dftrain$Seasonality == 48)&(dftrain$Year == 2011)] <- old - inc_sales
 			old <- dfsample$Weekly_Sales[(dfsample$Seasonality == 49)]
