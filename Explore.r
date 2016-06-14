@@ -150,4 +150,37 @@ dftotal <- rbind(dftraindiff, dftestdiff)
 dftotal <- transform(dftotal, Diff = as.numeric(Seasonality2) - Seasonality)
 
 write.csv(file = "datedifferences.csv", dftotal, row.names=FALSE)
+#========================================================================
+#how many dept we have full data (143 points)
 
+#working directory
+setwd("C:/mauricio/Dropbox/vagrant/apps/Kaggle---Walmart-forecast-challenge")
+
+library("dplyr")
+
+#load data
+dftrain <- read.csv("train.csv", header=TRUE)
+
+mas <- 0
+menos <- 0
+
+# for every store (45)
+for (i in 1:45)
+{
+	#for every department (99)
+	for (j in 1:99)
+	{
+		#do we have enough train data?
+		dfsample <- dftrain %>%
+			filter(Store == i) %>%
+			filter(Dept == j) 
+		# no data
+		if(nrow(dfsample) == 0) next
+		if(nrow(dfsample) < 143)
+			menos <- menos +1
+		else
+			mas <- mas +1
+	}
+}
+print(menos)
+print(mas)

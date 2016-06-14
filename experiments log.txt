@@ -143,10 +143,16 @@ Experiment #19 (Solution4.r)
 exp 18 and assigned all the sales of week 48 and 49 to days prior to christmas (8 days in 2011) instead of 14 days. Ranking 266
 
 Experiment #20 (Solution5.r)
-exp 19 and using ARIMA. Ranking 409
+exp 18 and using ARIMA. Ranking 409
 
 Experiment #21 (Solution6.r)
 exp 20 and 5x weighting holidays. Ranking 538
 
 Experiment #22 (Solution7.r)
 exp 20 and using a neural network. Ranking 439
+
+Experiment #23 (Solution8.r)
+exp 20 and using las year prediction if less than 143 datapoints per store/dept. Ranking 409
+
+Experiment #24 (Solution9.r)
+exp 18 but using weeks 47, 48 & 49, 3 weeks instead of 2. Ranking 92
