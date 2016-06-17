@@ -1,4 +1,9 @@
-﻿Experiment #5
+﻿Interesting readings:
+https://www.otexts.org/fpp Forecasting: principles and practice
+http://scikit-learn.org/stable/ ML in Python
+
+
+Experiment #5
 Asumptions:
 Sales per department are independent
 Sales per week are independent
